@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mantine-MultiSelect-pillsList {
+  width: 95%;
+}
+
+.mantine-MultiSelect-input {
+  padding: 1rem 1rem;
+  border-radius: 2rem;
+  box-shadow: #ccc 1px 1px 5px;
+}
+
+.mantine-MultiSelect-section {
+  width: 3.5rem;
+}
+
+.mantine-MultiSelect-section .mantine-UnstyledButton-root {
+  width: 3rem;
+  height: 3rem;
+}
+
+.mantine-Notifications-root {
+  z-index: 10000 !important;
+}
