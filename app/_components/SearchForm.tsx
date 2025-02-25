@@ -3,6 +3,7 @@
 import { SortToggle } from "@/_components/SortToggle";
 import { ActionIcon, MultiSelect } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import { track } from "@vercel/analytics";
 import { useRef, useState } from "react";
 
 interface SearchFormProps {
@@ -27,11 +28,6 @@ export function SearchForm({
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleSortDirectionChange = (newDirection: "asc" | "desc") => {
-    console.log(
-      "Sort direction changed to",
-      newDirection,
-      currentSortDirection
-    );
     setCurrentSortDirection(newDirection);
 
     if (formRef.current) {
@@ -93,6 +89,9 @@ export function SearchForm({
                   loading={pending}
                   type="submit"
                   variant="gradient"
+                  onClick={() =>
+                    track("search-dogs", { breeds: selectedBreeds.join(",") })
+                  }
                 >
                   <IconSearch aria-hidden="true" className="p-1" />
                 </ActionIcon>

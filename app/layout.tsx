@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@mantine/notifications/styles.css";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
+import { Analytics } from "@vercel/analytics/next";
 
 import Header from "./_components/Header";
 import { Providers } from "./providers";
@@ -62,6 +63,7 @@ export default async function RootLayout({
           />
           <main>{children}</main>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

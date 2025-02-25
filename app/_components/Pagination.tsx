@@ -2,6 +2,8 @@
 
 import { ActionIcon, Group, Text, Tooltip } from "@mantine/core";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { track } from "@vercel/analytics";
+import { dir } from "console";
 import { useEffect, useState } from "react";
 
 interface PageInfo {
@@ -114,12 +116,16 @@ export function Pagination({
               icon={<IconChevronLeft aria-hidden="true" size={18} />}
               label="Previous page"
               nextValue=""
-              onNavigate={() =>
+              onNavigate={() => {
+                track("paginate", {
+                  direction: "next",
+                  currentPage: Math.max(1, pageInfo.currentPage - 1),
+                });
                 setPageInfo((prev) => ({
                   ...prev,
                   currentPage: Math.max(1, prev.currentPage - 1),
-                }))
-              }
+                }));
+              }}
               pageRequest={Math.max(1, pageInfo.currentPage - 1)}
               prevValue={state.prev || ""}
               sortDirection={state.sortDirection}
@@ -133,12 +139,19 @@ export function Pagination({
               icon={<IconChevronRight aria-hidden="true" size={18} />}
               label="Next page"
               nextValue={state.next || ""}
-              onNavigate={() =>
+              onNavigate={() => {
+                track("paginate", {
+                  direction: "next",
+                  currentPage: Math.min(
+                    pageInfo.totalPages,
+                    pageInfo.currentPage + 1
+                  ),
+                });
                 setPageInfo((prev) => ({
                   ...prev,
                   currentPage: Math.min(prev.totalPages, prev.currentPage + 1),
-                }))
-              }
+                }));
+              }}
               pageRequest={Math.min(
                 pageInfo.totalPages,
                 pageInfo.currentPage + 1

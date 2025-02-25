@@ -3,6 +3,7 @@
 import { logoutAction } from "@/actions/auth";
 import { Avatar, Menu, UnstyledButton } from "@mantine/core";
 import { IconChevronDown, IconLogout } from "@tabler/icons-react";
+import { track } from "@vercel/analytics";
 import { useState } from "react";
 import { useTransition } from "react";
 
@@ -19,6 +20,7 @@ export default function UserMenu({
   const [isPending, startTransition] = useTransition();
 
   const handleLogout = () => {
+    track("logout");
     startTransition(() => {
       logoutAction();
     });

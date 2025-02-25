@@ -2,6 +2,7 @@
 
 import { Button, Tooltip } from "@mantine/core";
 import { IconSortAscending, IconSortDescending } from "@tabler/icons-react";
+import { track } from "@vercel/analytics";
 
 interface SortToggleProps {
   direction: "asc" | "desc";
@@ -15,6 +16,7 @@ export function SortToggle({
   onChange,
 }: SortToggleProps) {
   const toggleDirection = () => {
+    track("sort_toggle", { direction: direction === "asc" ? "desc" : "asc" });
     onChange(direction === "asc" ? "desc" : "asc");
   };
 

@@ -3,6 +3,7 @@
 import { Dog } from "@/lib/definitions";
 import { ActionIcon, Badge, Button, Group, Text } from "@mantine/core";
 import { IconConfetti, IconMapPin, IconPaw, IconX } from "@tabler/icons-react";
+import { track } from "@vercel/analytics";
 import Image from "next/image";
 
 interface MatchedDogCardProps {
@@ -82,6 +83,7 @@ export function MatchedDogCard({ dog, onClose }: MatchedDogCardProps) {
         <Button
           className="w-full bg-gradient-to-r from-green-500 to-emerald-700"
           onClick={() => {
+            track("contact-shelter", { dog: dog.id });
             // In a real app, this might open contact info or redirect
             alert("Calling shelter to meet your new best friend!");
           }}
